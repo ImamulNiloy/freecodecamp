@@ -7,18 +7,18 @@ fi
 
 SYM=$1
 
-#check input is a number
-#if [[ $SYM =~ ^[0-9]+$ ]]; then
-  #get data by atomic number
-    #EL_DATA=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius FROM elements FULL JOIN properties USING(atomic_number) FULL JOIN types USING(type_id) WHERE atomic_number=$SYM")
-#else
+check input is a number
+if [[ $SYM =~ ^[0-9]+$ ]]; then
+  get data by atomic number
+    EL_DATA=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius FROM elements FULL JOIN properties USING(atomic_number) FULL JOIN types USING(type_id) WHERE atomic_number=$SYM")
+else
   #check if input is fewer than 2 letters
-  if [[ ${#SYM} -le 2 ]]; then
+  #if [[ ${#SYM} -le 2 ]]; then
       #get data by symbol
-    EL_DATA=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius FROM elements FULL JOIN properties USING(atomic_number) FULL JOIN types USING(type_id) WHERE symbol='$SYM'")
-  else
+    #EL_DATA=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius FROM elements FULL JOIN properties USING(atomic_number) FULL JOIN types USING(type_id) WHERE symbol='$SYM'")
+  #else
         #get data by full name
-    EL_DATA=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius FROM elements FULL JOIN properties USING(atomic_number) FULL JOIN types USING(type_id) WHERE name='$SYM'")
+    #EL_DATA=$($PSQL "SELECT atomic_number, name, symbol, type, atomic_mass, melting_point_celsius, boiling_point_celsius FROM elements FULL JOIN properties USING(atomic_number) FULL JOIN types USING(type_id) WHERE name='$SYM'")
   fi
 fi
 
